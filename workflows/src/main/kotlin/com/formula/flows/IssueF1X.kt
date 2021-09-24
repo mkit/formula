@@ -12,31 +12,32 @@ import net.corda.core.identity.Party
 import net.corda.core.node.services.vault.QueryCriteria.LinearStateQueryCriteria
 import net.corda.core.transactions.TransactionBuilder
 import net.corda.core.utilities.ProgressTracker
+import java.math.BigDecimal
 import java.util.UUID
 
 
 @StartableByRPC
-class F1XIssueFlow(private val owner: Party, private val amount: Int) : FlowLogic<Unit>() {
+class F1XIssueFlow(
+    private val owner: Party,
+    private val amount: BigDecimal
+) : FlowLogic<Unit>() {
     override val progressTracker = ProgressTracker()
 
     @Suspendable
     override fun call(): Unit {
-
-        val notary = serviceHub.networkMapCache.notaryIdentities.first()
-
         val currentBalanceStateAndRef = serviceHub.vaultService.queryBy(
             F1XBalanceState::class.java, LinearStateQueryCriteria(
-                linearId = listOf(owner.toId())
+                linearId = listOf(owner.toF1XAccountId())
             )
         ).states.singleOrNull()
 
         val newBalanceState = F1XBalanceState(
-            linearId = owner.toId(),
-            amount = (currentBalanceStateAndRef?.state?.data?.amount ?: 0) + amount,
+            linearId = owner.toF1XAccountId(),
+            amount = (currentBalanceStateAndRef?.state?.data?.amount ?: BigDecimal.ZERO).add(amount),
             owner = owner
         )
 
-        val builder = TransactionBuilder(notary)
+        val builder = TransactionBuilder(serviceHub.notary())
         currentBalanceStateAndRef?.let { builder.addInputState(it) }
         builder.addCommand(F1XCommand.Issue())
         builder.addOutputState(newBalanceState)
@@ -48,5 +49,4 @@ class F1XIssueFlow(private val owner: Party, private val amount: Int) : FlowLogi
     }
 }
 
-@Suspendable
-fun Party.toId() = UniqueIdentifier(F1XBalanceContract.ID, UUID.nameUUIDFromBytes(owningKey.encoded))
+fun Party.toF1XAccountId() = UniqueIdentifier(F1XBalanceContract.ID, UUID.nameUUIDFromBytes(owningKey.encoded))

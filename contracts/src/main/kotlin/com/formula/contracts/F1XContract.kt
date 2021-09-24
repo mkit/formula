@@ -6,6 +6,7 @@ import net.corda.core.contracts.LinearState
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.identity.AbstractParty
 import net.corda.core.transactions.LedgerTransaction
+import java.math.BigDecimal
 
 class F1XBalanceContract : Contract {
     companion object {
@@ -15,7 +16,7 @@ class F1XBalanceContract : Contract {
     data class F1XBalanceState(
         override val linearId: UniqueIdentifier,
         val owner: AbstractParty,
-        val amount: Int
+        val amount: BigDecimal
     ) : LinearState {
         override val participants: List<AbstractParty>
             get() = listOf(owner)

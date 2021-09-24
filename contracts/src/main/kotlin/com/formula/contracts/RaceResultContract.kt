@@ -7,28 +7,34 @@ import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.identity.AbstractParty
 import net.corda.core.serialization.CordaSerializable
 import net.corda.core.transactions.LedgerTransaction
+import java.time.Instant
 
-typealias ShareId = String
+typealias DriverId = String
+
 
 @CordaSerializable
-data class ShareBalance(
-    val shareId: ShareId,
-    val amount: Int = 0
-)
-
-class F1ShareBalanceContract : Contract {
+data class RaceResults(
+    val orderedResults: List<DriverId>,
+    val raceStartTime: Instant
+) {
     companion object {
-        const val ID = "com.formula.contracts.F1ShareBalanceContract"
+        val RACE_POINTS_DISTRIBUTION = listOf(25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
+        val TOTAL_RACE_POINTS = RACE_POINTS_DISTRIBUTION.sum()
+    }
+}
+
+class RaceResultContract : Contract {
+    companion object {
+        const val ID = "com.formula.contracts.RaceResultContract"
     }
 
-    data class F1ShareBalanceState(
+    data class RaceResultState(
         override val linearId: UniqueIdentifier,
-        val owner: AbstractParty,
         val governanceBody: AbstractParty,
-        val balances: Set<ShareBalance>
+        val raceResults: RaceResults
     ) : LinearState {
         override val participants: List<AbstractParty>
-            get() = setOf(owner, governanceBody).toList()
+            get() = listOf(governanceBody)
     }
 
     override fun verify(tx: LedgerTransaction) {
@@ -36,8 +42,7 @@ class F1ShareBalanceContract : Contract {
     }
 
     // Used to indicate the transaction's intent.
-    sealed class F1ShareCommand : CommandData {
-        class Issue : F1ShareCommand()
-        class Transfer : F1ShareCommand()
+    sealed class RaceResultCommand : CommandData {
+        class Record : RaceResultCommand()
     }
 }
