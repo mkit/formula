@@ -8,7 +8,7 @@ import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.flows.FinalityFlow
 import net.corda.core.flows.FlowLogic
 import net.corda.core.flows.StartableByRPC
-import net.corda.core.identity.Party
+import net.corda.core.identity.AbstractParty
 import net.corda.core.node.services.vault.QueryCriteria.LinearStateQueryCriteria
 import net.corda.core.transactions.TransactionBuilder
 import net.corda.core.utilities.ProgressTracker
@@ -18,7 +18,7 @@ import java.util.UUID
 
 @StartableByRPC
 class F1XIssueFlow(
-    private val owner: Party,
+    private val owner: AbstractParty,
     private val amount: BigDecimal
 ) : FlowLogic<Unit>() {
     override val progressTracker = ProgressTracker()
@@ -49,4 +49,4 @@ class F1XIssueFlow(
     }
 }
 
-fun Party.toF1XAccountId() = UniqueIdentifier(F1XBalanceContract.ID, UUID.nameUUIDFromBytes(owningKey.encoded))
+fun AbstractParty.toF1XAccountId() = UniqueIdentifier(F1XBalanceContract.ID, UUID.nameUUIDFromBytes(owningKey.encoded))

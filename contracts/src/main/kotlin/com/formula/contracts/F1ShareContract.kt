@@ -8,11 +8,9 @@ import net.corda.core.identity.AbstractParty
 import net.corda.core.serialization.CordaSerializable
 import net.corda.core.transactions.LedgerTransaction
 
-typealias ShareId = String
-
 @CordaSerializable
 data class ShareBalance(
-    val shareId: ShareId,
+    val shareId: DriverId,
     val amount: Int = 0
 )
 
