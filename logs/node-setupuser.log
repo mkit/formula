@@ -1,0 +1,3 @@
+[INFO ] 2021-10-23T15:01:02,498 [main] RPCClient - Startup took 1381 msec
+[INFO ] 2021-10-23T15:01:02,759 [main] Client - [NodeInfo(addresses=[localhost:10005], legalIdentitiesAndCerts=[O=F1 Governor, L=London, C=GB], platformVersion=10, serial=1635001040571), NodeInfo(addresses=[localhost:10002], legalIdentitiesAndCerts=[O=Notary, L=London, C=GB], platformVersion=10, serial=1635001044055), NodeInfo(addresses=[localhost:10008], legalIdentitiesAndCerts=[O=McLaren, L=London, C=GB], platformVersion=10, serial=1635001042337), NodeInfo(addresses=[localhost:10011], legalIdentitiesAndCerts=[O=William Hills, L=London, C=GB], platformVersion=10, serial=1635001043115)]
+[INFO ] 2021-10-23T15:01:02,768 [main] Client - O=F1 Governor, L=London, C=GB
