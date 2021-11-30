@@ -7,6 +7,7 @@ import net.corda.core.flows.FinalityFlow
 import net.corda.core.flows.FlowLogic
 import net.corda.core.flows.StartableByRPC
 import net.corda.core.identity.Party
+import net.corda.core.node.ServiceHub
 import net.corda.core.node.services.vault.QueryCriteria.LinearStateQueryCriteria
 import net.corda.core.transactions.TransactionBuilder
 import net.corda.core.utilities.ProgressTracker
@@ -22,18 +23,18 @@ class BuyF1SharesFlow(private val seller: Party,
     @Suspendable
     override fun call() {
 
-        val notary = serviceHub.networkMapCache.notaryIdentities.first()
+        val notary = serviceHub.notary()
 
         val currentBalanceStateAndRef = serviceHub.vaultService.queryBy(
             F1ShareBalanceState::class.java, LinearStateQueryCriteria(
-                linearId = listOf(owner.toId())
+                linearId = listOf(buyer.toId())
             )
         ).states.singleOrNull()
 
         val newBalanceState = F1ShareBalanceState(
-            linearId = owner.toId(),
+            linearId = buyer.toId(),
             amount = (currentBalanceStateAndRef?.state?.data?.amount ?: 0) + amount,
-            owner = owner
+            owner = buyer
         )
 
         val builder = TransactionBuilder(notary)
@@ -47,3 +48,5 @@ class BuyF1SharesFlow(private val seller: Party,
         subFlow(FinalityFlow(ptx, emptyList()))
     }
 }
+
+fun ServiceHub.notary() = networkMapCache.notaryIdentities.first()

@@ -19,7 +19,7 @@ class IssueF1SharesIssueFlow(private val owner: Party, private val amount: Int) 
     @Suspendable
     override fun call(): Unit {
 
-        val notary = serviceHub.networkMapCache.notaryIdentities.first()
+        val notary = serviceHub.notary()
 
         val currentBalanceStateAndRef = serviceHub.vaultService.queryBy(
             F1ShareBalanceState::class.java, LinearStateQueryCriteria(
