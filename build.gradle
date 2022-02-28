@@ -102,45 +102,54 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
     node {
         name "O=Notary,L=London,C=GB"
         notary = [validating : false]
-        p2pPort 10002
+        p2pPort 10001
         rpcSettings {
-            address("localhost:10003")
-            adminAddress("localhost:10043")
+            address("localhost:10002")
+            adminAddress("localhost:10003")
         }
     }
     node {
         name "O=F1 Governor,L=London,C=GB"
-        p2pPort 10005
+        p2pPort 10011
         rpcSettings {
-            address("localhost:10006")
-            adminAddress("localhost:10046")
+            address("localhost:10012")
+            adminAddress("localhost:10013")
         }
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
     node {
-        name "O=Exchange,L=London,C=GB"
-        p2pPort 10005
+        name "O=Marcedes,L=London,C=GB"
+        p2pPort 10031
         rpcSettings {
-            address("localhost:10006")
-            adminAddress("localhost:10046")
+            address("localhost:10022")
+            adminAddress("localhost:10023")
         }
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
     node {
         name "O=McLaren,L=London,C=GB"
-        p2pPort 10008
+        p2pPort 10041
         rpcSettings {
-            address("localhost:10009")
-            adminAddress("localhost:10049")
+            address("localhost:10032")
+            adminAddress("localhost:10033")
         }
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
     node {
         name "O=William Hills,L=London,C=GB"
-        p2pPort 10011
+        p2pPort 10051
         rpcSettings {
-            address("localhost:10009")
-            adminAddress("localhost:10049")
+            address("localhost:10042")
+            adminAddress("localhost:10043")
+        }
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+    }
+    node {
+        name "O=Ladbrokes,L=London,C=GB"
+        p2pPort 10061
+        rpcSettings {
+            address("localhost:10052")
+            adminAddress("localhost:10053")
         }
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }

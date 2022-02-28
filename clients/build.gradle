@@ -70,10 +70,34 @@ shadowJar {
 /* This task will start the springboot server that connects to your node (via RPC connection). All of the http requests
  * are in the Controller file. You can leave the Server.kt and NodeRPCConnection.kt file untouched for your use.
  */
-task runTemplateServer(type: JavaExec, dependsOn: assemble) {
+task runPlayer2(type: JavaExec, dependsOn: assemble) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'com.template.webserver.ServerKt'
-    args '--server.port=10050', '--config.rpc.host=localhost', '--config.rpc.port=10006', '--config.rpc.username=user1', '--config.rpc.password=test'
+    main = 'com.formula.player.PlayerKt'
+    args '--address=localhost:10052', '--user=user1', '--secret=test', '--port=8050'
+}
+
+task runPlayer1(type: JavaExec, dependsOn: assemble) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.formula.player.PlayerKt'
+    args '--address=localhost:10042', '--user=user1', '--secret=test', '--port=8040'
+}
+
+task runHouse2(type: JavaExec, dependsOn: assemble) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.formula.house.HouseKt'
+    args '--address=localhost:10032', '--user=user1', '--secret=test', '--port=8030'
+}
+
+task runHouse1(type: JavaExec, dependsOn: assemble) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.formula.house.HouseKt'
+    args '--address=localhost:10022', '--user=user1', '--secret=test', '--port=8020'
+}
+
+task runGov(type: JavaExec, dependsOn: assemble) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.formula.governor.GovernorKt'
+    args '--address=localhost:10012', '--user=user1', '--secret=test', '--port=8010'
 }
 
 tasks.named("shadowJar") { dependsOn(tasks.named("buildDependencies")) }

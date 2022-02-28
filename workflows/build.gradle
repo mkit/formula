@@ -52,6 +52,8 @@ publishing {
             groupId = 'com.formula'
             artifactId = 'workflows'
             version = '1.0'
+
+            from components.java
         }
     }
 }

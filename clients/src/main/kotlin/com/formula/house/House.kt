@@ -1,7 +1,13 @@
-package com.formula
+package com.formula.house
 
-import net.corda.client.rpc.CordaRPCClient
-import net.corda.core.utilities.NetworkHostAndPort.Companion.parse
+import com.formula.Args
+import com.formula.NodeConnection
+import com.formula.house.views.DriversView
+import com.formula.house.views.RaceView
+import com.formula.myName
+import com.formula.startWebServer
+import com.xenomachina.argparser.ArgParser
+import net.corda.core.utilities.NetworkHostAndPort
 import net.corda.core.utilities.loggerFor
 
 /**
@@ -9,22 +15,22 @@ import net.corda.core.utilities.loggerFor
  *
  * The RPC connection is configured using command line arguments.
  */
-fun main(args: Array<String>) = Client().main(args)
+fun main(args: Array<String>) = House().main(args)
 
-private class Client {
+class House {
     companion object {
-        val logger = loggerFor<Client>()
+        val logger = loggerFor<House>()
     }
 
     fun main(args: Array<String>) {
         // Create an RPC connection to the node.
-        require(args.size == 3) { "Usage: Client <node address> <rpc username> <rpc password>" }
-        val nodeAddress = parse(args[0])
-        val rpcUsername = args[1]
-        val rpcPassword = args[2]
-        val client = CordaRPCClient(nodeAddress)
-        val clientConnection = client.start(rpcUsername, rpcPassword)
-        val proxy = clientConnection.proxy
+        val parsedArgs = ArgParser(args).parseInto(::Args)
+        val nodeConnection = NodeConnection(
+            NetworkHostAndPort.parse(parsedArgs.address),
+            parsedArgs.user,
+            parsedArgs.secret
+        )
+        val proxy = nodeConnection.proxy
 
         // Interact with the node.
         // Example #1, here we print the nodes on the network.
@@ -37,7 +43,9 @@ private class Client {
         println("\n-- Here is the node info of the node that the client connected to --")
         logger.info("{}", me)
 
+        startWebServer(parsedArgs.port.toInt(), proxy.myName(), listOf(RaceView(proxy), DriversView(proxy)))
+
         //Close the client connection
-        clientConnection.close()
+        //nodeConnection.close()
     }
 }

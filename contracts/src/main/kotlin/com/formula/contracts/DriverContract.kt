@@ -10,30 +10,25 @@ import net.corda.core.serialization.CordaSerializable
 import net.corda.core.transactions.LedgerTransaction
 
 @CordaSerializable
-data class ShareBalance(
-    val shareId: DriverId,
-    val amount: Int = 0
+data class DriverData(
+    val driverId: DriverId,
+    val house: String
 )
 
-@CordaSerializable
-data class OwnerShareBalance(
-    val owner: String,
-    val balances: Set<ShareBalance>
-)
-
-class F1ShareBalanceContract : Contract {
+class DriverContract : Contract {
     companion object {
-        const val ID = "com.formula.contracts.F1ShareBalanceContract"
+        const val ID = "com.formula.contracts.DriverContract"
     }
 
-    data class F1ShareBalanceState(
+    data class DriverState(
         override val linearId: UniqueIdentifier,
-        val owner: Party,
-        val governanceBody: AbstractParty,
-        val balances: Set<ShareBalance>
+        val driverId: DriverId,
+        val house: Party
     ) : LinearState {
         override val participants: List<AbstractParty>
-            get() = setOf(owner, governanceBody).toList()
+            get() = listOf(house)
+
+        fun toDriverData(): DriverData = DriverData(driverId, house.name.toString())
     }
 
     override fun verify(tx: LedgerTransaction) {
@@ -41,8 +36,8 @@ class F1ShareBalanceContract : Contract {
     }
 
     // Used to indicate the transaction's intent.
-    sealed class F1ShareCommand : CommandData {
-        class Issue : F1ShareCommand()
-        class Transfer : F1ShareCommand()
+    sealed class DriverCommand : CommandData {
+        class Issue : DriverCommand()
+        class Transfer : DriverCommand()
     }
 }

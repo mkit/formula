@@ -24,6 +24,8 @@ publishing {
             groupId = 'com.formula'
             artifactId = 'contracts'
             version = '1.0'
+
+            from components.java
         }
     }
 }
