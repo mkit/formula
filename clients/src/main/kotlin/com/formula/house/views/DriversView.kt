@@ -82,7 +82,7 @@ class DriversView(private val proxy: CordaRPCOps) : ComponentView {
                 thead().new {
                     tr().new {
                         th().text("Driver ID")
-                        th().text("House")
+                        th().text("Manufacturer")
                     }
                 }
                 render(drivers, { tbody() }) { list ->

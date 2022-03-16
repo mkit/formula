@@ -55,7 +55,7 @@ class RaceView(private val proxy: CordaRPCOps) : ComponentView {
     override fun renderTab(): ElementCreator<*>.() -> Unit = {
         div(fomantic.ui.fullHeight.padding(20, 20, 60, 20)).new {
             h2(fomantic.ui.header).text("Historical Race Results")
-            h4(fomantic.ui.header).text("Winnings distribution: ${RaceResults.TOTAL_RACE_POINTS}")
+            h4(fomantic.ui.header).text("Winnings distribution: ${RaceResults.TOTAL_RACE_POINTS} F1X")
             div(fomantic.ui.vertical.animated.button).new {
                 div(fomantic.ui.hidden.content).text("Refresh").on.click {
                     refresh()

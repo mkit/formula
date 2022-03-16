@@ -149,4 +149,4 @@ fun nonFomanticClass(value: String): Map<String, String> {
     return mapOf("class" to value)
 }
 
-fun CordaRPCOps.myName() = nodeInfo().legalIdentities.first().name.toString()
+fun CordaRPCOps.myName() = nodeInfo().legalIdentities.first().name.organisation

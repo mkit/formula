@@ -31,7 +31,7 @@ import kweb.tr
 import net.corda.core.messaging.CordaRPCOps
 
 class BalanceView(private val proxy: CordaRPCOps) : ComponentView {
-    override val icon = "dollar sign"
+    override val icon = "coins"
     override val name = "Balance"
 
 
@@ -73,7 +73,7 @@ class BalanceView(private val proxy: CordaRPCOps) : ComponentView {
                 val button = button(fomantic.ui.teal.labeled.icon.button.width(170)).also {
                     it.text = KVar("Buy F1 Tokens")
                     it.new {
-                        i(fomantic.ui.iconClass("dollar"))
+                        i(fomantic.ui.iconClass("coins"))
                     }
                 }
                 val input = input(type = InputType.text, placeholder = "0")

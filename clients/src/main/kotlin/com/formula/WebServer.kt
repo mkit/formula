@@ -97,7 +97,7 @@ private fun Application.kwebFeature(role: String, componentViews: List<Component
                                     .height(70).image.withImageSource("/static/fomantic/images/F1-logo.png")
                             )
                             div(fomantic.ui.middle.aligned.fullHeight.padding(top = 20, left = 20)).new {
-                                h1(fomantic.ui.header).text("F1 Platform - $role")
+                                h1(fomantic.ui.header).text("$role")
                             }
                             div(fomantic.right.menu).new {
                                 a(href = "/logout", attributes = fomantic.item).new(position = 0) {
