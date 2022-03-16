@@ -16,7 +16,7 @@ In order to run this PoC you will need the following:
 
 In order to run the PoC you need to build it.
 1. Download the sourcecode to your local machine by running the following command:
-   ``git clone {{ URL_TO_THE_REPO }}``
+   ``git clone git@github.com:mkit/formula.git``
 2. Navigate to the project main directory and run the following commands:
    ``./gradlew clean deployNodes``
    ``./gradlew publishToMavenLocal``
