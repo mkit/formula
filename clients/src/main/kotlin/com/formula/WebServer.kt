@@ -93,8 +93,8 @@ private fun Application.kwebFeature(role: String, componentViews: List<Component
                         }
                         div(fomantic.ui.top.fixed.menu).new {
                             img(
-                                fomantic.ui.width(70)
-                                    .height(70).image.withImageSource("/static/fomantic/images/F1-logo.png")
+                                fomantic.ui.width(80)
+                                    .height(45).image.withImageSource("/static/fomantic/images/F1-logo.png")
                             )
                             div(fomantic.ui.middle.aligned.fullHeight.padding(top = 20, left = 20)).new {
                                 h1(fomantic.ui.header).text("$role")
