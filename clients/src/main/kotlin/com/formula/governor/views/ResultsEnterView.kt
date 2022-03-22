@@ -81,10 +81,12 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
             }
             h2(fomantic.ui.header).text("Enter Race Results:")
             div(fomantic.ui.grid).new {
-                div(fomantic.ui.three.wide.column).new {
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("First Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { first = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { first = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
@@ -92,7 +94,9 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                     }
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Second Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { second = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { second = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
@@ -100,7 +104,9 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                     }
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Third Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { third = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { third = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
@@ -108,7 +114,9 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                     }
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Fourth Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { fourth = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { fourth = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
@@ -116,17 +124,19 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                     }
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Fifth Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { fifth = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { fifth = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
                         }
                     }
-                }
-                div(fomantic.ui.three.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Sixth Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { sixth = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { sixth = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
@@ -134,7 +144,9 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                     }
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Seventh Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { seventh = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { seventh = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
@@ -142,7 +154,9 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                     }
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Eighth Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { eighth = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { eighth = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
@@ -150,7 +164,9 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                     }
                     div(fomantic.ui.labeled.input.padding(top = 20).width(300)).new {
                         div(fomantic.ui.label).text("Ninth Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { ninth = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { ninth = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
@@ -158,7 +174,9 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                     }
                     div(fomantic.ui.labeled.input.padding(top = 20).width(300)).new {
                         div(fomantic.ui.label).text("Tenth Place")
-                        render(drivers, { select(fomantic.ui.selection.dropdown.padding(0)).also { tenth = it } }) { list ->
+                        render(
+                            drivers,
+                            { select(fomantic.ui.selection.dropdown.padding(0)).also { tenth = it } }) { list ->
                             list.forEach { driverData ->
                                 option().text(driverData.driverId)
                             }
