@@ -43,7 +43,7 @@ class House {
         println("\n-- Here is the node info of the node that the client connected to --")
         logger.info("{}", me)
 
-        startWebServer(parsedArgs.port.toInt(), proxy.myName(), listOf(RaceView(proxy), DriversView(proxy)))
+        startWebServer(parsedArgs.port.toInt(), proxy.myName(), listOf(RaceView(proxy), DriversView(proxy, proxy.myName())))
 
         //Close the client connection
         //nodeConnection.close()

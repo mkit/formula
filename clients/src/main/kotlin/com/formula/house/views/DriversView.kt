@@ -30,7 +30,7 @@ import kweb.tr
 import net.corda.core.internal.concurrent.doOnComplete
 import net.corda.core.messaging.CordaRPCOps
 
-class DriversView(private val proxy: CordaRPCOps) : ComponentView {
+class DriversView(private val proxy: CordaRPCOps, private val myName: String) : ComponentView {
     override val icon = "user circle"
     override val name = "Drivers"
 
@@ -42,7 +42,7 @@ class DriversView(private val proxy: CordaRPCOps) : ComponentView {
 
     private fun refresh() {
         GlobalScope.launch {
-            drivers.value = proxy.startFlowDynamic(GetDriversFlow::class.java).returnValue.get()
+            drivers.value = proxy.startFlowDynamic(GetDriversFlow::class.java).returnValue.get().filter { it.house == myName }
         }
     }
 
