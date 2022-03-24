@@ -12,6 +12,7 @@ import kweb.id
 import kweb.new
 import kweb.plugins.fomanticUI.FomanticUIClasses
 import kweb.plugins.fomanticUI.fomantic
+import net.corda.core.identity.CordaX500Name
 import net.corda.core.messaging.CordaRPCOps
 import java.net.ServerSocket
 import java.time.ZoneId
@@ -149,4 +150,4 @@ fun nonFomanticClass(value: String): Map<String, String> {
     return mapOf("class" to value)
 }
 
-fun CordaRPCOps.myName() = nodeInfo().legalIdentities.first().name.organisation
+fun CordaRPCOps.myName() = nodeInfo().legalIdentities.first().name

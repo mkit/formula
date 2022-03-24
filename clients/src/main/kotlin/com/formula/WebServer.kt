@@ -32,17 +32,18 @@ import kweb.p
 import kweb.plugins.fomanticUI.fomantic
 import kweb.plugins.fomanticUI.fomanticUIPlugin
 import kweb.respondKweb
+import net.corda.core.identity.CordaX500Name
 import org.slf4j.event.Level
 import java.time.Duration
 
-fun startWebServer(port: Int, role: String, componentsViews: List<ComponentView>) {
+fun startWebServer(port: Int, cordaName: CordaX500Name, componentsViews: List<ComponentView>) {
     println("Go to: https://0.0.0.0:$port")
     embeddedServer(Jetty, port = port) {
-        kwebFeature(role, componentsViews)
+        kwebFeature(cordaName, componentsViews)
     }.start()
 }
 
-private fun Application.kwebFeature(role: String, componentViews: List<ComponentView>) {
+private fun Application.kwebFeature(cordaName: CordaX500Name, componentViews: List<ComponentView>) {
 
     // Respond for HEAD verb
     install(AutoHeadResponse)
@@ -93,11 +94,11 @@ private fun Application.kwebFeature(role: String, componentViews: List<Component
                         }
                         div(fomantic.ui.top.fixed.menu).new {
                             img(
-                                fomantic.ui.width(80)
-                                    .height(45).image.withImageSource("/static/fomantic/images/F1-logo.png")
+                                fomantic.ui.padding(5).width(180)
+                                    .height(77).image.withImageSource("/static/fomantic/images/f1-logo.png")
                             )
                             div(fomantic.ui.middle.aligned.fullHeight.padding(top = 20, left = 20)).new {
-                                h1(fomantic.ui.header).text("$role")
+                                h1(fomantic.ui.header).text("${cordaName.organisation}")
                             }
                             div(fomantic.right.menu).new {
                                 a(href = "/logout", attributes = fomantic.item).new(position = 0) {
