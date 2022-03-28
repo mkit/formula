@@ -92,6 +92,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Second Place")
                         render(
@@ -102,6 +104,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Third Place")
                         render(
@@ -112,6 +116,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Fourth Place")
                         render(
@@ -122,6 +128,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Fifth Place")
                         render(
@@ -132,6 +140,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Sixth Place")
                         render(
@@ -142,6 +152,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Seventh Place")
                         render(
@@ -152,6 +164,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(200)).new {
                         div(fomantic.ui.label).text("Eighth Place")
                         render(
@@ -162,6 +176,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(300)).new {
                         div(fomantic.ui.label).text("Ninth Place")
                         render(
@@ -172,6 +188,8 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
+                }
+                div(fomantic.ui.sixteen.wide.column).new {
                     div(fomantic.ui.labeled.input.padding(top = 20).width(300)).new {
                         div(fomantic.ui.label).text("Tenth Place")
                         render(
@@ -183,32 +201,33 @@ class ResultsEnterView(private val proxy: CordaRPCOps) : ComponentView {
                         }
                     }
                 }
-                div(fomantic.ui.twelve.wide.column)
-            }
-            div(fomantic.ui.padding(top = 20)).new {
-                button(fomantic.ui.button, submit).text("Enter Results").also {
-                    it.on.click {
-                        GlobalScope.launch {
-                            val results = listOfNotNull(
-                                first!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                second!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                third!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                fourth!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                fifth!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                sixth!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                seventh!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                eighth!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                ninth!!.getValue().get().takeIf { it != EMPTY.driverId },
-                                tenth!!.getValue().get().takeIf { it != EMPTY.driverId }
-                            )
-                            if (results.isEmpty() || results.toSet().size != results.size) return@launch
-                            async {
-                                proxy.startFlowDynamic(
-                                    RecordRaceResultsFlow::class.java,
-                                    RaceResults(results, Instant.now())
-                                ).returnValue.get()
+                div(fomantic.ui.sixteen.wide.column).new {
+                    div(fomantic.ui.padding(top = 20)).new {
+                        button(fomantic.ui.button, submit).text("Enter Results").also {
+                            it.on.click {
+                                GlobalScope.launch {
+                                    val results = listOfNotNull(
+                                        first!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        second!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        third!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        fourth!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        fifth!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        sixth!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        seventh!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        eighth!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        ninth!!.getValue().get().takeIf { it != EMPTY.driverId },
+                                        tenth!!.getValue().get().takeIf { it != EMPTY.driverId }
+                                    )
+                                    if (results.isEmpty() || results.toSet().size != results.size) return@launch
+                                    async {
+                                        proxy.startFlowDynamic(
+                                            RecordRaceResultsFlow::class.java,
+                                            RaceResults(results, Instant.now())
+                                        ).returnValue.get()
+                                    }
+                                    refresh()
+                                }
                             }
-                            refresh()
                         }
                     }
                 }

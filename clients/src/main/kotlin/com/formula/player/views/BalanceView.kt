@@ -47,7 +47,7 @@ class BalanceView(private val proxy: CordaRPCOps) : ComponentView {
         div(fomantic.ui.fullHeight.padding(20, 20, 60, 20)).new {
             div(fomantic.ui.raised.segment).new {
                 div(fomantic.ui.grid).new {
-                    div(fomantic.ui.two.wide.column).new {
+                    div(fomantic.ui.five.wide.column).new {
                         span().text("Current Balance (F1X):")
                     }
                     div(fomantic.ui.two.wide.column).new {
@@ -66,7 +66,7 @@ class BalanceView(private val proxy: CordaRPCOps) : ComponentView {
                             }
                         }
                     }
-                    div(fomantic.ui.ten.wide.column)
+                    div(fomantic.ui.seven.wide.column)
                 }
             }
             div(fomantic.ui.left.action.input).new {
