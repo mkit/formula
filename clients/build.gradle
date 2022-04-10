@@ -82,11 +82,11 @@ task runPlayer1(type: JavaExec, dependsOn: assemble) {
     args '--address=localhost:10042', '--user=user1', '--secret=test', '--port=8040'
 }
 
-//task runHouse2(type: JavaExec, dependsOn: assemble) {
-//    classpath = sourceSets.main.runtimeClasspath
-//    main = 'com.formula.house.HouseKt'
-//    args '--address=localhost:10032', '--user=user1', '--secret=test', '--port=8030'
-//}
+task runHouse2(type: JavaExec, dependsOn: assemble) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.formula.house.HouseKt'
+    args '--address=localhost:10032', '--user=user1', '--secret=test', '--port=8030'
+}
 
 task runHouse1(type: JavaExec, dependsOn: assemble) {
     classpath = sourceSets.main.runtimeClasspath

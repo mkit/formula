@@ -94,7 +94,7 @@ private fun Application.kwebFeature(cordaName: CordaX500Name, componentViews: Li
                         }
                         div(fomantic.ui.top.fixed.menu).new {
                             img(
-                                fomantic.ui.padding(5).width(180)
+                                fomantic.ui.padding(5).width(90)
                                     .height(77).image.withImageSource("/static/fomantic/images/f1-logo.png")
                             )
                             div(fomantic.ui.middle.aligned.fullHeight.padding(top = 20, left = 20)).new {
