@@ -5,6 +5,7 @@ import com.formula.flows.GetRaceResultsFlow
 import com.formula.fullHeight
 import com.formula.iconClass
 import com.formula.padding
+import com.formula.printRaceResults
 import com.formula.views.ComponentView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -33,7 +34,7 @@ import java.util.Locale
 
 class RaceView(private val proxy: CordaRPCOps) : ComponentView {
     override val icon = "flag checkered"
-    override val name = "Races"
+    override val name = "Historical Races"
 
     private val races: KVar<List<RaceResults>> = KVar(emptyList())
 
@@ -74,7 +75,9 @@ class RaceView(private val proxy: CordaRPCOps) : ComponentView {
                     list.forEach { raceResults ->
                         tr().new {
                             td().text(formatter.format(raceResults.raceStartTime))
-                            td().text(raceResults.orderedResults.toString())
+                            td().new {
+                                printRaceResults(raceResults.orderedResults)
+                            }
                         }
                     }
                 }

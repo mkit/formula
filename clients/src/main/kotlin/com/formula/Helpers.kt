@@ -1,15 +1,19 @@
 package com.formula
 
+import com.formula.contracts.DriverId
+import com.formula.contracts.RaceResults
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kweb.Element
 import kweb.ElementCreator
+import kweb.TdElement
 import kweb.button
 import kweb.classes
 import kweb.div
 import kweb.i
 import kweb.id
 import kweb.new
+import kweb.p
 import kweb.plugins.fomanticUI.FomanticUIClasses
 import kweb.plugins.fomanticUI.fomantic
 import net.corda.core.identity.CordaX500Name
@@ -151,3 +155,9 @@ fun nonFomanticClass(value: String): Map<String, String> {
 }
 
 fun CordaRPCOps.myName() = nodeInfo().legalIdentities.first().name
+
+fun ElementCreator<TdElement>.printRaceResults(results: List<DriverId>) {
+    results.mapIndexed { index, driverId ->
+        p().text("${index + 1} place - $driverId (${RaceResults.RACE_POINTS_DISTRIBUTION[index]} points)")
+    }
+}

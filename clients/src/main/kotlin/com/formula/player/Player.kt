@@ -4,8 +4,11 @@ import com.formula.Args
 import com.formula.NodeConnection
 import com.formula.myName
 import com.formula.player.views.BalanceView
+import com.formula.player.views.CalendarView
 import com.formula.player.views.DriversView
 import com.formula.player.views.RaceView
+import com.formula.player.views.RedemptionsView
+import com.formula.player.views.SportExchangeView
 import com.formula.startWebServer
 import com.xenomachina.argparser.ArgParser
 import net.corda.core.utilities.NetworkHostAndPort
@@ -44,7 +47,16 @@ class Player {
         println("\n-- Here is the node info of the node that the client connected to --")
         logger.info("{}", me)
 
-        startWebServer(parsedArgs.port.toInt(), proxy.myName(), listOf(RaceView(proxy), BalanceView(proxy), DriversView(proxy)))
+        startWebServer(
+            parsedArgs.port.toInt(), proxy.myName(), listOf(
+                RaceView(proxy),
+                BalanceView(proxy),
+                DriversView(proxy),
+                CalendarView(proxy),
+                SportExchangeView(proxy),
+                RedemptionsView(proxy)
+            )
+        )
 
 //        //Close the client connection
 //        nodeConnection.close()
